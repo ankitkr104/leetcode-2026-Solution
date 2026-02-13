@@ -1,0 +1,92 @@
+You are given a string s consisting only of the characters 'a', 'b', and 'c'.
+
+A substring of s is called balanced if all distinct characters in the substring appear the same number of times.
+
+Return the length of the longest balanced substring of s.
+
+ 
+
+Example 1:
+
+  Input: s = "abbac"
+
+  Output: 4
+
+  Explanation:
+
+    The longest balanced substring is "abba" because both distinct characters 'a' and 'b' each appear exactly 2 times.
+
+
+Example 2:
+
+  Input: s = "aabcc"
+
+  Output: 3
+
+  Explanation:
+
+    The longest balanced substring is "abc" because all distinct characters 'a', 'b' and 'c' each appear exactly 1 time.
+
+
+Example 3:
+
+  Input: s = "aba"
+
+  Output: 2
+
+  Explanation:
+
+    One of the longest balanced substrings is "ab" because both distinct characters 'a' and 'b' each appear exactly 1 time. Another longest balanced substring is "ba".
+
+ 
+
+Constraints:
+
+  1 <= s.length <= 10power5
+  s contains only the characters 'a', 'b', and 'c'.
+
+
+Solution (python3):
+
+class Solution:
+    def longestBalanced(self, s: str) -> int:
+        n = len(s)
+        a = b = c = ans = 0
+        mp = {0: -1}
+        M = 2 * n + 7
+        
+        for i, ch in enumerate(s):
+            a += ch == 'a'
+            b += ch == 'b'
+            c += ch == 'c'
+            k = (a - b) * M + (a - c)
+            if k in mp:
+                ans = max(ans, i - mp[k])
+            else:
+                mp[k] = i
+        
+        def f(x, y):
+            nonlocal ans
+            p = 0
+            mp2 = {0: -1}
+            for i, ch in enumerate(s):
+                if ch != x and ch != y:
+                    p = 0
+                    mp2 = {0: i}
+                    continue
+                p += 1 if ch == x else -1
+                if p in mp2:
+                    ans = max(ans, i - mp2[p])
+                else:
+                    mp2[p] = i
+        
+        for x, y in [('a', 'b'), ('a', 'c'), ('b', 'c')]:
+            f(x, y)
+        
+        for ch in 'abc':
+            cst = 0
+            for ch2 in s:
+                cst = cst + 1 if ch2 == ch else 0
+                ans = max(ans, cst)
+        
+        return ans
