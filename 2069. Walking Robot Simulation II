@@ -36,7 +36,6 @@ Example 1:
     +-------------------------------------------> x
         0      1      2      3      4      5
 
-
   Input
     ["Robot", "step", "step", "getPos", "getDir", "step", "step", "step", "getPos", "getDir"]
     [[6, 3], [2], [2], [], [], [2], [1], [4], [], []]
