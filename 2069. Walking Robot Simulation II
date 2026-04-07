@@ -102,3 +102,4 @@ class Robot:
 
     def getDir(self):
         return ["East", "North", "West", "South"][self.d]
+
