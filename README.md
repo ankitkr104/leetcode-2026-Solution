@@ -1,4 +1,4 @@
-# leetcode-2026-Solution
+# 👋 Hi there! Welcome to leetcode-2026-Solution
 
 This repository contains my daily solutions to LeetCode problems.
 The goal is consistency, clarity, and improved problem-solving skills.
